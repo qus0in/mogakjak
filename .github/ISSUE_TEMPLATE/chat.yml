@@ -1,0 +1,33 @@
+name: Chat Report
+description: AI Agent와의 대화 내용이나 채팅 기반의 작업 요청을 기록합니다.
+title: "[Chat]: "
+labels: ["chat"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        AI Agent(Antigravity)와의 대화 내용, 혹은 주요 결정 사항을 기록하는 템플릿입니다.
+  
+  - type: textarea
+    id: context
+    attributes:
+      label: 대화 요약 (Context)
+      description: 어떤 주제에 대해 대화했는지, 주요 안건은 무엇인지 요약해주세요.
+      placeholder: "예: 테스트 스택 선정에 대한 논의 (Vitest vs Jest)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: content
+    attributes:
+      label: 상세 내용 (Details)
+      description: 대화 내용, 결정된 사항, 혹은 AI가 제안한 솔루션을 기록해주세요.
+    validations:
+      required: true
+
+  - type: textarea
+    id: action_items
+    attributes:
+      label: 후속 작업 (Action Items)
+      description: 이 대화 이후 진행해야 할 작업이 있다면 적어주세요.
+      placeholder: "- [ ] .github 워크플로우 생성\n- [ ] 패키지 설치"
