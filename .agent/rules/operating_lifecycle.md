@@ -31,11 +31,24 @@ These rules govern how every task should be initiated and concluded to ensure co
         ```
 
 2.  **Commit Convention**:
-    *   Stage changes: `git add .`
-    *   Commit command: `git commit -m "prefix: Korean message"`
-    *   **Prefixes (English)**:
-        *   `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
-    *   **Message**: Must be in **Korean** (한글).
+    *   **Format**: `git commit -m "type: subject"`
+    *   **Language**: `type` is in English, `subject` is in **Korean** (한글).
+    *   **Allowed Types**:
+        *   `feat`: 새로운 기능 추가
+        *   `fix`: 버그 수정
+        *   `docs`: 문서 수정
+        *   `style`: 코드 포맷팅, 세미콜론 누락, 안쓰는 import 제거 등 (코드 변경 없음)
+        *   `design`: CSS 등 사용자 UI 디자인 변경
+        *   `refactor`: 코드 리팩토링 (기능 변경 없음)
+        *   `test`: 테스트 코드 추가/수정
+        *   `chore`: 빌드 업무, 패키지 매니저, 잡동사니 (소스 코드 변경 없음)
+        *   `perf`: 성능 개선
+        *   `ci`: CI 구성 파일 및 스크립트 변경
+        *   `revert`: 이전 커밋 되돌리기
+    *   **Examples**:
+        *   `feat: 로그인 API 구현`
+        *   `fix: 회원가입 시 유효성 검사 에러 수정`
+        *   `design: 메인 페이지 버튼 스타일 변경`
 
 3.  **End of Task (PR Preparation)**:
     *   **Version Bump (Patch)**:
