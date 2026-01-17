@@ -6,32 +6,46 @@ description: Rules for Git branching strategy and post-task knowledge consolidat
 
 These rules govern how every task should be initiated and concluded to ensure code stability and continuous system improvement.
 
-## 1. 🌿 Git Branching Strategy
-**Rule**: Never commit directly to `main` for new features or complex tasks.
+## 1. 🌿 Git Branching Strategy (Strict Flow)
+**Rule**: Use `dev` as an ephemeral feature branch. Always sync with `main` before starting.
 
-1.  **Start of Task**:
-    *   Ensure you are on the `dev` branch.
-    *   Use `git switch dev` (or `git switch -c dev` if creating new).
-    *   *Note*: If a specific feature branch is needed, branch off `dev` (e.g., `feature/login`), but for general "new work", `dev` is the working standard.
+1.  **Start of Task (Initialization)**:
+    *   **Sync Main**:
+        ```bash
+        git switch main
+        git pull origin main
+        ```
+    *   **Reset Dev**:
+        ```bash
+        git branch -D dev  # Delete existing dev
+        ```
+    *   **Version Bump (Minor)**:
+        *   Update the minor version based on the current main state *before* branching.
+        *   `npm version minor --no-git-tag-version`
+        *   *Note*: This change is staged/carried over to the new branch.
+    *   **Create Branch**:
+        ```bash
+        git switch -c dev
+        git add package.json
+        git commit -m "chore: Start new version cycle (Minor bump)"
+        ```
 
 2.  **Commit Convention**:
     *   Stage changes: `git add .`
     *   Commit command: `git commit -m "prefix: Korean message"`
     *   **Prefixes (English)**:
-        *   `feat`: New feature (새로운 기능)
-        *   `fix`: Bug fix (버그 수정)
-        *   `docs`: Documentation (문서 수정)
-        *   `style`: Formatting/CSS (코드 포맷팅, 세미콜론 누락 등)
-        *   `refactor`: Code refactoring (리팩토링)
-        *   `test`: Test code (테스트 코드)
-        *   `chore`: Build/Tool/Config (빌드 업무, 패키지 매니저 등)
+        *   `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
     *   **Message**: Must be in **Korean** (한글).
-    *   *Example*: `feat: 사용자 로그인 기능 구현`
 
-3.  **End of Task (PR)**:
-    *   Once work is verified, submit a Pull Request to `main`.
-    *   Use GitHub CLI: `gh pr create --base main --head dev --title "Title" --body "Description"`
-    *   *Self-Correction*: If strictly local, ensure code is merged to `dev`.
+3.  **End of Task (PR Preparation)**:
+    *   **Version Bump (Patch)**:
+        *   Before pushing the PR, update the patch version.
+        *   `npm version patch --no-git-tag-version`
+        *   `git add package.json`
+        *   `git commit -m "chore: bump patch version for PR"`
+    *   **Push & PR**:
+        *   `git push origin dev --force` (if needed)
+        *   `gh pr create --base main --head dev --title "Title" --body "Description"`
 
 ## 2. 🧠 Knowledge Consolidation (Continuous Improvement)
 **Rule**: Every session must end with a system upgrade.
