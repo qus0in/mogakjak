@@ -6,28 +6,22 @@ body:
   - type: markdown
     attributes:
       value: |
-        AI Agent(Antigravity)와의 대화 내용, 혹은 주요 결정 사항을 기록하는 템플릿입니다.
+        AI Agent(Antigravity)와의 대화 핵심 내용을 기록하는 템플릿입니다.
   
   - type: textarea
-    id: context
+    id: ask
     attributes:
-      label: 대화 요약 (Context)
-      description: 어떤 주제에 대해 대화했는지, 주요 안건은 무엇인지 요약해주세요.
-      placeholder: "예: 테스트 스택 선정에 대한 논의 (Vitest vs Jest)"
+      label: Ask
+      description: 사용자(User)의 질문, 요청 사항, 혹은 해결하고자 하는 문제를 기록해주세요.
+      placeholder: "예: Vitest와 Jest 중 어떤 것이 이 프로젝트에 더 적합한가요?"
     validations:
       required: true
 
   - type: textarea
-    id: content
+    id: answer
     attributes:
-      label: 상세 내용 (Details)
-      description: 대화 내용, 결정된 사항, 혹은 AI가 제안한 솔루션을 기록해주세요.
+      label: Answer
+      description: AI(Agent)의 답변, 제안된 솔루션, 혹은 분석 결과를 기록해주세요.
+      placeholder: "예: Vitest가 Vite 환경과 호환성이 좋고 속도가 빠르므로 추천합니다."
     validations:
       required: true
-
-  - type: textarea
-    id: action_items
-    attributes:
-      label: 후속 작업 (Action Items)
-      description: 이 대화 이후 진행해야 할 작업이 있다면 적어주세요.
-      placeholder: "- [ ] .github 워크플로우 생성\n- [ ] 패키지 설치"
